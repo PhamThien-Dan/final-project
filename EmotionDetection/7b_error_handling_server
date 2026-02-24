@@ -1,0 +1,3 @@
+# Kiểm tra xem cảm xúc chủ đạo có hợp lệ không (Task 7)
+    if response['dominant_emotion'] is None:
+        return "Invalid text! Please try again!"

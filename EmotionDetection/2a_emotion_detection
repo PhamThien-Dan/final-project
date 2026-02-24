@@ -1,0 +1,23 @@
+import requests
+import json
+
+def emotion_detector(text_to_analyze):
+    # URL của dịch vụ Watson NLP
+    url = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
+    
+    # Header chứa thông tin định danh
+    header = {"NOTEBOOK_ID": "Ghi_ID_Cua_Ban"}
+    
+    # Dữ liệu gửi đi (Payload) chứa văn bản cần phân tích
+    myobj = { "raw_document": { "text": text_to_analyze } }
+    
+    # Gửi yêu cầu POST đến API
+    response = requests.post(url, json=myobj, headers=header)
+    
+    # Chuyển đổi phản hồi từ dạng text sang JSON
+    formatted_response = json.loads(response.text)
+    
+    # Trích xuất thông tin cảm xúc từ JSON trả về
+    emotions = formatted_response['emotionPredictions'][0]['emotion']
+    
+    return emotions
